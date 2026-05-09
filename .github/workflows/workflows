@@ -21,8 +21,8 @@ jobs:
 
     - name: Add and Commit
       run: |
-        git config --local user.email "your_email@example.com"
-        git config --local user.name "your_github_username"
+        git config --local user.email "jmrswcswtb@privaterelay.appleid.com"
+        git config --local user.name "mag0ne"
         git add unzipped/
         git commit -m "Auto-unzipped files"
         git push
