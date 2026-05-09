@@ -1,1 +1,30 @@
 
+name: Unzip Files
+
+on:
+  push: # Trigger the workflow upon a push event for .zip files
+    paths:
+      - '**/*.zip'
+
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Unzip Files
+      run: |
+        mkdir -p unzipped
+        find . -name "*.zip" -exec unzip {} -d unzipped \;
+
+    - name: Add and Commit
+      run: |
+        git config --local user.email "your_email@example.com"
+        git config --local user.name "your_github_username"
+        git add unzipped/
+        git commit -m "Auto-unzipped files"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
